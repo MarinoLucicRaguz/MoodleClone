@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Enrollment Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0px;
+        }
+        
+        header {
+            background-color: yellow;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin: 0;
+        }
+        
+        p {
+            margin-bottom: 10px;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        select {
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            float: right;
+            margin-top: -35px;
+        }
+        
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Update Enrollment Status</h1>
+        <a class="back-link" href="{% url 'enrolled_students_professor' subject_id=enrollment.subject.id %}">Go Back</a>
+    </header>
+
+    <div class="content">
+        <h2>Student Details:</h2>
+        <p><strong>Name:</strong> {{ enrollment.student.first_name }} {{ enrollment.student.last_name }}</p>
+        <p><strong>Username:</strong> {{ enrollment.student.username }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="status">Status:</label>
+            <select name="status" id="status">
+                <option value="passed">Passed</option>
+                <option value="failed">Failed</option>
+            </select>
+            <br>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>

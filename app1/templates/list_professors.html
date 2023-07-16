@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Professors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: yellow;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: blue;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: blue;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .no-professors {
+            color: #999;
+        }
+
+        .edit-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>List of Professors</h1>
+        <a href="{% url 'admin_dashboard' %}">Return to home page</a>
+
+        <ul>
+            {% for professor in professors %}
+                <li>
+                    <h2>{{ professor.username }}</h2>
+                    <p>Name: {{ professor.first_name }} {{ professor.last_name }}</p>
+                    <p>Role: {{ professor.role }}</p>
+                    <a href="{% url 'edit_user' user_id=professor.id %}" class="edit-button">Edit</a>
+                </li>
+                <hr>
+            {% empty %}
+                <li class="no-professors">No professors found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Professor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .subject-box {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .subject-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .options-list {
+            margin-top: 5px;
+        }
+        .options-list li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: yellow;
+            padding: 10px;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .logout-link {
+            display: inline-block;
+            color: #fff;
+            background-color: blue;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+        .logout-link:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome, {{ professor.username }}!</h1>
+        <a class="logout-link" href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <h2>Your Subjects:</h2>
+    {% for subject in subjects %}
+        <div class="subject-box">
+            <div class="subject-name">{{ subject.name }}</div>
+            <ul class="options-list">
+                <li><a href="{% url 'enrolled_students_professor' subject_id=subject.id %}">Show Enrolled Students</a></li>
+                <li><a href="{% url 'passed_students_professor' subject_id=subject.id %}">Show Passed Students</a></li>
+                <li><a href="{% url 'failed_students_professor' subject_id=subject.id %}">Show Failed Students</a></li>
+            </ul>
+        </div>
+    {% empty %}
+        <p>No subjects found.</p>
+    {% endfor %}
+</body>
+</html>

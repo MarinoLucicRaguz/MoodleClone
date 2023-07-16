@@ -1,0 +1,11 @@
+<h1>Enrollment List</h1>
+<ul>
+  {% for student in students %}
+    <li>
+      <h2>{{ student.username }}</h2>
+      <a href="{% url 'create_enrollment' student_id=student.id %}">Create Enrollment</a>
+    </li>
+  {% empty %}
+    <li>No students found.</li>
+  {% endfor %}
+</ul>

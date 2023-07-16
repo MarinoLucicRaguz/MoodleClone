@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Enrollment for {{ student.username }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: yellow;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: blue ;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: blue;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+
+        .enrollment-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            color: blue;
+            background-color: rgba(240, 237, 237, 0.651);
+            border-radius: 5px;
+        }
+
+        .enrollment-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dropdown-select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .submit-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Enrollment for {{ student.username }}</h1>
+        <a href="{% url 'list_students' %}">Back to Student List</a>
+
+        <form method="post" action="{% url 'create_enrollment' student_id=student.id %}">
+            {% csrf_token %}
+
+            {% for enrollment in enrollments %}
+            <div class="enrollment-item">
+                <div class="enrollment-details">
+                    <h2>{{ enrollment.subject.name }}</h2>
+                    <div class="dropdown">
+                        <select name="status_{{ enrollment.subject.id }}" class="dropdown-select" {% if enrollment.status == 'passed'%}disabled{% endif %}>
+                            <option value="not_enrolled" {% if enrollment.status == 'not_enrolled' %}selected{% endif %}>Not Enrolled</option>
+                            <option value="enrolled" {% if enrollment.status == 'enrolled' %}selected{% endif %}>Enrolled</option>
+                            <option value="passed" {% if enrollment.status == 'passed' %}selected{% endif %}>Passed</option>
+                            <option value="failed" {% if enrollment.status == 'failed' %}selected{% endif %}>Failed</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="submit-button">Save</button>
+        </form>
+    </div>
+</body>
+</html>

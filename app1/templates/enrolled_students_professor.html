@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enrolled Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: yellow;
+            padding: 10px;
+            margin: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin: 0;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            margin-top: 60px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        
+        span {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+        
+        .update-status-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+        
+        .update-status-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Students who are enrolled to {{ subject.name }}</h1>
+        <a class="back-link" href="{% url 'professor_dashboard' %}">Go Back</a>
+    </header>
+
+    <ul>
+        {% for enrollment in enrolled_students %}
+            <li>
+                <span>{{ forloop.counter }}</span>
+                {{ enrollment.student.first_name }} {{ enrollment.student.last_name }}
+                {% if enrollment.status == 'enrolled' %}
+                    <a class="update-status-btn" href="{% url 'update_enrollment_status' enrollment_id=enrollment.id %}">Update Status</a>
+                {% else %}
+                    <span>Status: {{ enrollment.status }}</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No enrolled students found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

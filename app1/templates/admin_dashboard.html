@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-header {
+            background-color: yellow;
+            color: purple;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .dashboard-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-buttons {
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .dashboard-button {
+            flex: 1;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .dashboard-button:last-child {
+            margin-right: 0;
+        }
+
+        .dashboard-button:hover {
+            background-color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, {{ request.user.username }}</p>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="dashboard-buttons">
+            <a href="{% url 'add_subject' %}">
+            <button class="dashboard-button" type="submit">Add Subject</button>
+            </a>
+
+            <a href="{% url 'list_subjects' %}">
+                <button class="dashboard-button">List All Subjects</button>
+            </a>
+
+            <a href="{% url 'create_user' %}">
+              <button class="dashboard-button" type="submit">Create User</button>
+            </a>
+
+            <a href="{% url 'list_students' %}">
+                <button class="dashboard-button">List All Students</button>
+            </a>
+
+            <a href="{% url 'list_professors' %}">
+                <button class="dashboard-button">List All Professors</button>
+            </a>
+
+            <a href="{% url 'show_people' %}"> 
+                <button class="dashboard-button"> show ALL</button>
+            </a>
+            <form method="POST" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button class="dashboard-button" type="submit">Logout</button>
+          </form>
+        </div>
+    </div>
+</body>
+</html>

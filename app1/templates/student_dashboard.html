@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard - {{ student.username }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: yellow;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: purple;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .enrollment-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: lightblue;
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        p {
+            margin: 0;
+            color: #777;
+        }
+
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:disabled {
+            border-color: #ddd;
+            background-color: #f9f9f9;
+        }
+
+        button[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+            background-color: #ccc;
+            color: #333;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="logout-button" href="{% url 'logout' %}">Logout</a>
+        <h1>Student Dashboard - {{ student.username }}</h1>
+
+        <form method="post" action="{% url 'student_dashboard' %}">
+            {% csrf_token %}
+            {% for enrollment in enrollments %}
+            <div class="enrollment-item">
+                <h2>{{ enrollment.subject.name }}</h2>
+                <p>Status: {{ enrollment.get_status_display }}</p>
+                <div>
+                    <select name="status_{{ enrollment.subject.id }}">
+                        {% if enrollment.status == 'not_enrolled' %}
+                            <option value="not_enrolled" selected>Not Enrolled</option>
+                            <option value="enrolled">Enrolled</option>
+                        {% elif enrollment.status == 'enrolled' %}
+                            <option value="not_enrolled">Not Enrolled</option>
+                            <option value="enrolled" selected>Enrolled</option>
+                        {% else %}
+                            <option value="not_enrolled" disabled>Not Enrolled</option>
+                            <option value="enrolled" disabled>Enrolled</option>
+                        {% endif %}
+                        <option value="passed" {% if enrollment.status == 'passed' %}selected disabled{% endif %}>Passed</option>
+                        <option value="failed" {% if enrollment.status == 'failed' %}selected disabled{% endif %}>Failed</option>
+                    </select>
+                </div>
+            </div>
+            {% endfor %}
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

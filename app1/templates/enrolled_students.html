@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enrolled Students for {{ subject.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: blue;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: yellow;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: left;
+            max-width: max-content; 
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            color: blue;
+            border-radius: 5px;
+            text-align: left;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: max-content;
+        }
+        
+        .student-number {
+            margin-right: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Students for Subject</h1>
+        </div>
+        <ul>
+            {% for enrollment in enrolled_students %}
+                <li>
+                    <span class="student-number">{{ forloop.counter }}</span>
+                    {{ enrollment.student.first_name }} {{ enrollment.student.last_name }}
+                </li>
+            {% empty %}
+                <li>No students currently enrolled.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'list_subjects' %}">Back to Subject List</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<h1>Subject List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Total Passed</th>
+      <th>Regular Passed</th>
+      <th>Non-Regular Passed</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for subject_item in subject_data %}
+    <tr>
+      <td>{{ subject_item.subject.name }}</td>
+      <td>{{ subject_item.total_passed }}</td>
+      <td>{{ subject_item.regular_passed }}</td>
+      <td>{{ subject_item.non_regular_passed }}</td>
+      <td>
+        <a href="{% url 'show_enrolled_students' subject_item.subject.id %}">Details</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
