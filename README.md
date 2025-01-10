@@ -1,76 +1,43 @@
-MoodleClone
+# MoodleClone
 
-This is a web application built with Django and Python for an academic course project.
-Table of Contents
+MoodleClone is a web application developed with **Django** and **Python** as part of an academic course project. It replicates key functionalities of Moodle, providing a platform for managing courses, assignments, and user interactions.
 
-    Introduction
-    Features
-    Installation
-    Usage
-    Contributing
-    License
+---
 
-Introduction
+## Table of Contents
 
-MoodleClone is a web application designed to mimic some functionalities of Moodle. It is developed using the Django framework in Python.
-Features
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Installation](#installation)
+---
 
-    User authentication and management
-    Course creation and enrollment
-    Assignment submission and grading
-    Simple, intuitive interface
+## Introduction
 
-Installation
+MoodleClone is a simplified web-based learning management system designed to streamline course management, assignment submissions, and grading. Built using the Django framework, it demonstrates core web development concepts and best practices.
 
-    Clone the repository:
+---
 
-    sh
+## Features
 
-git clone https://github.com/MarinoLucicRaguz/MoodleAppPythonDjango.git
+- **User Authentication**: Register, log in, and manage user accounts.
+- **Course Management**: Create, edit, and enroll in courses.
+- **Assignment Submissions**: Submit and grade assignments easily.
+- **Clean and Intuitive Interface**: User-friendly design for effortless navigation.
 
-Navigate to the project directory:
+---
 
-sh
+## Installation
 
-cd MoodleAppPythonDjango
+Follow these steps to set up MoodleClone on your local machine:
 
-Create and activate a virtual environment:
+### Prerequisites
 
-sh
+- **Python** (version 3.6 or later)
+- **pip** (Python package installer)
+- **Virtual Environment** (optional but recommended)
 
-python -m venv env
-source env/bin/activate   # On Windows use `env\Scripts\activate`
+### Steps
 
-Install the dependencies:
-
-sh
-
-pip install -r requirements.txt
-
-Apply migrations:
-
-sh
-
-python manage.py migrate
-
-Run the development server:
-
-sh
-
-    python manage.py runserver
-
-Usage
-
-    Access the application:
-        Open your web browser and navigate to http://127.0.0.1:8000/.
-
-    User operations:
-        Register a new account or log in with an existing one.
-        Enroll in courses, submit assignments, and view grades.
-
-Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/MarinoLucicRaguz/MoodleAppPythonDjango.git
